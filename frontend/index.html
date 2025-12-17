@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Reviewer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header>
+        <a href="index.html" class="logo">AI CodeReviewer</a>
+        <nav>
+            <a href="index.html" class="active">Review</a>
+            <a href="history.html">History</a>
+        </nav>
+    </header>
+
+    <main class="fade-in">
+
+        <div class="card" style="text-align: center; padding: 4rem 2rem;">
+            <h1> Elevate Your Code Quality</h1>
+
+            <p>
+
+            </p>
+
+            <div class="file-drop" id="dropZone">
+
+                <h3> Drop file here or click to upload</h3>
+                <p> Supports .js, .java, .py, .cpp, .txt</p>
+                <input type="file" id="fileInput" accept=".js, .java, .py, .cpp, .txt">
+
+            </div>
+
+            <div style="position: relative;">
+                <span>OR PASTE CODE</span>
+            </div>
+
+            <textarea id="codeArea" placeholder="// Paste your code here..."></textarea>
+
+            <div>
+                <button class="btn btn-primary" id="analyzeBtn" onclick="submitCode()">
+                    Analyze Code
+                </button>
+            </div>
+
+
+
+        </div>
+
+    </main>
+
+
+
+</body>
+</html>
