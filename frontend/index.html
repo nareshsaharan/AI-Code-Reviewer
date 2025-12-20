@@ -22,8 +22,9 @@
         <div class="card" style="text-align: center; padding: 4rem 2rem;">
             <h1> Elevate Your Code Quality</h1>
 
-            <p>
-
+            <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem;">
+                Instant, AI-powered code analysis and optimization. <br>
+                Paste your code or drop a file to get started.
             </p>
 
             <div class="file-drop" id="dropZone">
@@ -31,16 +32,16 @@
                 <h3> Drop file here or click to upload</h3>
                 <p> Supports .js, .java, .py, .cpp, .txt</p>
                 <input type="file" id="fileInput" accept=".js, .java, .py, .cpp, .txt">
-
             </div>
 
             <div style="position: relative;">
-                <span>OR PASTE CODE</span>
+                <span class="hrsep">OR PASTE CODE</span>
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 2rem 0;">
             </div>
 
             <textarea id="codeArea" placeholder="// Paste your code here..."></textarea>
 
-            <div>
+            <div style="text-align: right">
                 <button class="btn btn-primary" id="analyzeBtn" onclick="submitCode()">
                     Analyze Code
                 </button>
@@ -52,6 +53,7 @@
 
     </main>
 
+    <script src="script.js"></script>
 
 
 </body>
