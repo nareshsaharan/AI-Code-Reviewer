@@ -1,5 +1,17 @@
 
-const API_BASE = 'http://localhost:8080/api/code';
+const API_BASE = 'http://localhost:9095/api/code';
+const USER_ID_KEY = 'ai_codereviewer_user_id';
+
+function getUserId() {
+    let id = localStorage.getItem(USER_ID_KEY);
+    if(!id) {
+        id = crypto.randomUUID();
+        localStorage.setItem(USER_ID_KEY, id);
+    }
+    return id;
+}
+
+const USER_ID = getUserId();
 
 async function submitCode() {
     
@@ -28,20 +40,23 @@ async function submitCode() {
     // call backend API
 
     try {
-        // const reponse = await fetch(`${API_BASE}/upload`, {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json'},
-        //     body: JSON.stringify({
-        //         filename: filename,
-        //         code: code
-        //     })
-        // });
+        const reponse = await fetch(`${API_BASE}/upload`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                userId: USER_ID,
+                filename: filename,
+                language: detectLanguage(filename),
+                code: code
+            })
+        });
 
-        // if(reponse.ok) {
-        //     // do something
-        // } else {
-        //     alert('Upload failed');
-        // }
+        if(reponse.ok) {
+        
+            // do something
+        } else {
+            alert('Upload failed');
+        }
     } catch(e) {
         console.error(e);
         alert('Error connection to server');
@@ -50,5 +65,16 @@ async function submitCode() {
         analyzeBtn.innerText = 'Analyze Code';
     }
 
+
+}
+
+
+function detectLanguage(filename) {
+    if(filename.endsWith('.js')) return 'javascript';
+    if(filename.endsWith('.java')) return 'java';
+    if(filename.endsWith('.py')) return 'python';
+    if(filename.endsWith('.cpp')) return 'cpp';
+
+    return 'text';
 
 }
