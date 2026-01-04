@@ -27,5 +27,21 @@ public class CodeSubmission {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @PrePersist
+    protected  void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
 }
+
+/*
+CREATE TABLE code_submission (
+    id BINARY(16) NOT NULL,
+    user_id BINARY(16) NOT NULL,
+    filename VARCHAR(255),
+    language VARCHAR(255),
+    code TEXT,
+    created_at DATETIME(6),
+    PRIMARY KEY (id)
+) ;
+ */

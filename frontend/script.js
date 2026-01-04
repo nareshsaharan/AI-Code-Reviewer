@@ -52,7 +52,11 @@ async function submitCode() {
         });
 
         if(reponse.ok) {
-        
+            const submission = await reponse.json();
+
+            // trigger analysis api
+            await fetch(`${API_BASE}/analyze/${submission.id}`, {method: 'POST'});
+            
             // do something
         } else {
             alert('Upload failed');
