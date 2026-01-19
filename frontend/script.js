@@ -201,3 +201,46 @@ async function loadHistory() {
         list.innerText = "Error loading History";
     }   
 }
+
+
+async function loadComparisonPage() {
+    const params = new URLSearchParams(window.location.search);
+    const submissionId = params.get('id');
+
+    if(!submissionId) return;
+
+    const res = await fetch(`${API_BASE}/version/${submissionId}`);
+    if(res.ok) {
+        const versions = await res.json();
+        const vA = document.getElementById('versionA');
+        const vB = document.getElementById('versionB');
+
+        versions.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v.id;
+            opt.innerText = `Version ${v.versionNumber}`;
+            vA.appendChild(opt.cloneNode(true));
+            vB.appendChild(opt);
+        });
+    }
+}
+
+
+async function updateComparison() {
+    const vAId = document.getElementById('versionA').value;
+    const vBId = document.getElementById('versionB').value;
+
+    if(vAId && vBId && vAId != 'Select version A' && vBId != 'Select version B') {
+        const res = await fetch(`${API_BASE}/compare`, {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify({versionA : vAId, versionB: vBId})
+        });
+
+        if(res.ok) {
+            const data = await res.json();
+            document.getElementById('codeA').innerText = data.versionA.code;
+            document.getElementById('codeB').innerText = data.versionB.code;
+        } 
+    }
+}

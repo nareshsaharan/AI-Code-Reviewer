@@ -4,9 +4,11 @@ import com.acciojob.aicodereview.model.CodeSubmission;
 import com.acciojob.aicodereview.model.CodeVersion;
 import com.acciojob.aicodereview.repository.CodeSubmissionReporsitory;
 import com.acciojob.aicodereview.repository.CodeVersonRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CodeService {
@@ -31,5 +33,9 @@ public class CodeService {
 
         return saved;
 
+    }
+
+    public List<CodeSubmission> getUserSubmissions(UUID userId) {
+        return submissionReporsitory.findByUserId(userId);
     }
 }
